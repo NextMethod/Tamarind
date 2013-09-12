@@ -8,16 +8,16 @@ namespace Tamarind.Cache
     // TODO: NEEDS DOCUMENTATION.
     public interface ICache<K, V>
     {
-        public V GetIfPresent(K key);
-        public V Get(K key, Func<V> valueLoader);
-        public ImmutableDictionary<K, V> GetAllPresent(IEnumerator<K> keys);
-        public void Put(K key, V value);
-        public void PutAll(Dictionary<K, V> xs);
-        public void Invalidate(K key);
-        public void InvlidateAll(IEnumerator<K> keys);
-        public long Count { get; }
-        //public CacheStats Stats { get; }
+        V GetIfPresent(K key);
+        V Get(K key, Func<V> valueLoader);
+        ImmutableDictionary<K, V> GetAllPresent(IEnumerator<K> keys);
+        void Put(K key, V value);
+        void PutAll(Dictionary<K, V> xs);
+        void Invalidate(K key);
+        void InvlidateAll(IEnumerator<K> keys);
+        long Count { get; }
+        //CacheStats Stats { get; }
         ConcurrentDictionary<K, V> ToDictionary();
-        public void CleanUp();
+        void CleanUp();
     }
 }
