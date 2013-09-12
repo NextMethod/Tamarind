@@ -42,8 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CacheStats.cs" />
     <Compile Include="Cache\ICache.cs" />
+    <Compile Include="Cache\ICacheLoader.cs" />
+    <Compile Include="Cache\ICacheStats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
