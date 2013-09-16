@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
 using System.Linq;
+
+using Tamarind.Base;
 
 namespace Tamarind.Cache
 {
@@ -9,12 +10,12 @@ namespace Tamarind.Cache
 
 		public CacheStats(long hitCount, long missCount, long loadSuccessCount, long loadExceptionCount, long totalLoadTime, long evictionCount)
 		{
-			Contract.Requires(hitCount >= 0);
-			Contract.Requires(missCount >= 0);
-			Contract.Requires(loadSuccessCount >= 0);
-			Contract.Requires(loadExceptionCount >= 0);
-			Contract.Requires(totalLoadTime >= 0);
-			Contract.Requires(evictionCount >= 0);
+			Preconditions.CheckArgument(hitCount >= 0);
+			Preconditions.CheckArgument(missCount >= 0);
+			Preconditions.CheckArgument(loadSuccessCount >= 0);
+			Preconditions.CheckArgument(loadExceptionCount >= 0);
+			Preconditions.CheckArgument(totalLoadTime >= 0);
+			Preconditions.CheckArgument(evictionCount >= 0);
 
 			HitCount = hitCount;
 			MissCount = missCount;

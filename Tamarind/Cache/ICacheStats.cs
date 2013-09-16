@@ -8,15 +8,6 @@ namespace Tamarind.Cache
 	/// <summary>
 	///     Statistics about the performance of a <seealso cref="ICache{TKey,TValue}" />. Instances of this class are
 	///     immutable.
-	///     <para>
-	///         See
-	///         <a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/cache/CacheStats.html">
-	///             Guava
-	///             Reference
-	///         </a>
-	///     </para>
-	/// </summary>
-	/// <remarks>
 	///     <para>Cache statistics are incremented according to the following rules:</para>
 	///     <list type="bullet">
 	///         <item>
@@ -65,6 +56,15 @@ namespace Tamarind.Cache
 	///             </description>
 	///         </item>
 	///     </list>
+	/// </summary>
+	/// <remarks>
+	///     <para>
+	///         See
+	///         <a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/cache/CacheStats.html">
+	///             Guava
+	///             Reference
+	///         </a>
+	///     </para>
 	/// </remarks>
 	public interface ICacheStats
 	{
