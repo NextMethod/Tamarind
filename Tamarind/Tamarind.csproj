@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Base\Preconditions.cs" />
     <Compile Include="Base\Ticker.cs" />
+    <Compile Include="Cache\Cache.cs" />
     <Compile Include="Cache\CacheBuilder.cs" />
     <Compile Include="Cache\CacheStats.cs" />
     <Compile Include="Cache\ICache.cs" />
