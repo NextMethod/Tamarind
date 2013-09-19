@@ -88,7 +88,7 @@ namespace Tamarind.Cache
 		///     dictionary is modified while the operation is in progress.
 		/// </summary>
 		[PublicAPI]
-		void PutAll(IDictionary<TKey, TValue> map);
+		void PutAll(IDictionary<TKey, TValue> dictionary);
 
 		/// <summary>
 		///     Discards any cached value for key <paramref name="key" />.
