@@ -24,6 +24,6 @@ namespace Tamarind.Cache
         /// Notifies the listener that a removel has occured (at some point in the past).
         /// </summary>
         /// <param name="notification">The cache item removal notification.</param>
-        void onRemoval(RemovalNotification<TKey, TValue> notification);
+        Task onRemoval(RemovalNotification<TKey, TValue> notification);
     }
 }
