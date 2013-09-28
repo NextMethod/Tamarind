@@ -46,6 +46,7 @@
     <Compile Include="Cache\ILoadingCache.cs" />
     <Compile Include="Cache\IStatsCounter.cs" />
     <Compile Include="Cache\IWeigher.cs" />
+    <Compile Include="Cache\LoadingCache.cs" />
     <Compile Include="Cache\RemovalCause.cs" />
     <Compile Include="Cache\RemovalNotification.cs" />
     <Compile Include="Cache\SimpleStatsCounter.cs" />
