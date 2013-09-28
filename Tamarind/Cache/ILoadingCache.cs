@@ -68,7 +68,7 @@ namespace Tamarind.Cache
 		IReadOnlyDictionary<TKey, TValue> GetAll(IEnumerable<TKey> keys);
 
 		/// <summary>
-		///     Loads a enw value for key <paramref name="key" />. Whiel the new value is loading the previous value (if any) will
+		///     Loads a new value for key <paramref name="key" />. While the new value is loading the previous value (if any) will
 		///     continue to be returned by <see cref="Get" /> unless it is evicted. If the new value is loaded successfully it will
 		///     replace the previous value in the cache; if an exception is thrown while refreshing the previous value will remain,
 		///     <em>and the exception will be logged and swallowed</em>.
