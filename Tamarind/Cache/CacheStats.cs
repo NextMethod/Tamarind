@@ -68,12 +68,12 @@ namespace Tamarind.Cache
 		public ICacheStats Minus(ICacheStats other)
 		{
 			return new CacheStats(
-				Math.Max(0, HitCount - other.HitCount),
-				Math.Max(0, MissCount - other.MissCount),
-				Math.Max(0, LoadSuccessCount - other.LoadSuccessCount),
-				Math.Max(0, LoadExceptionCount - other.LoadExceptionCount),
-				Math.Max(0, TotalLoadTime - other.TotalLoadTime),
-				Math.Max(0, EvictionCount - other.EvictionCount)
+				System.Math.Max(0, HitCount - other.HitCount),
+				System.Math.Max(0, MissCount - other.MissCount),
+				System.Math.Max(0, LoadSuccessCount - other.LoadSuccessCount),
+				System.Math.Max(0, LoadExceptionCount - other.LoadExceptionCount),
+				System.Math.Max(0, TotalLoadTime - other.TotalLoadTime),
+				System.Math.Max(0, EvictionCount - other.EvictionCount)
 				);
 		}
 
