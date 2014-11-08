@@ -61,7 +61,7 @@ namespace Tamarind.Tests.Threading
 
             Action act = () =>
             {
-                var foo = striped[-1];
+                var ignored = striped[-1];
             };
 
             act.ShouldThrow<IndexOutOfRangeException>();
@@ -69,7 +69,7 @@ namespace Tamarind.Tests.Threading
 
             act = () =>
             {
-                var foo = striped[striped.Size];
+                var ignored = striped[striped.Size];
             };
 
             act.ShouldThrow<IndexOutOfRangeException>();

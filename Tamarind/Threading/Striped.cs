@@ -16,9 +16,9 @@ namespace Tamarind.Threading
         /// <param name="stripes">The minimum number of stripes (locks) required</param>
         /// <returns>A new <c cref="IStriped{SimpleLock}" /></returns>
         [PublicAPI]
-        public static IStriped<SimpleLock> Lock(int stripes)
+        public static IStriped<MonitorLock> Lock(int stripes)
         {
-            return new CompactStriped<SimpleLock>(stripes, () => new SimpleLock());
+            return new CompactStriped<MonitorLock>(stripes, () => new MonitorLock());
         }
 
         /// <summary>
