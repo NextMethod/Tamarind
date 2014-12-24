@@ -60,7 +60,7 @@
     <Compile Include="Threading\CompactStriped.cs" />
     <Compile Include="Threading\IStriped.cs" />
     <Compile Include="Threading\PowerOfTwoStriped.cs" />
-    <Compile Include="Threading\SimpleLock.cs" />
+    <Compile Include="Threading\MonitorLock.cs" />
     <Compile Include="Threading\Striped.cs" />
   </ItemGroup>
   <ItemGroup />
