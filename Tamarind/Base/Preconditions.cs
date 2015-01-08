@@ -7,7 +7,7 @@ using Tamarind.Annotations;
 namespace Tamarind.Base
 {
     /// <summary>
-    ///     Simple sattic methods to be called at the start of your own methods to verify correct arugments and state.
+    ///     Simple static methods to be called at the start of your own methods to verify correct arugments and state.
     ///     <para>
     ///         This allows constructs such as:
     ///         <code>

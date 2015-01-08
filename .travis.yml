@@ -1,0 +1,8 @@
+language: csharp
+solution: Tamarind.sln
+install:
+  - nuget restore Tamarind.sln
+  - nuget install xunit.runners -Prerelease -ExcludeVersion -OutputDirectory testrunner
+script:
+  - xbuild /p:Configuration=Release Tamarind.sln
+  - mono ./testrunner/xunit.runners/tools/xunit.console.exe ./Tamarind.Tests/bin/Release/Tamarind.Tests.dll
