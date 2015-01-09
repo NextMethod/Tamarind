@@ -39,8 +39,8 @@
     <Compile Include="Base\IStopwatch.cs" />
     <Compile Include="Base\Preconditions.cs" />
     <Compile Include="Base\Stopwatches.cs" />
-    <Compile Include="Base\Stopwatches.SystemStopwatch.cs" />
     <Compile Include="Base\Stopwatches.TickerBackedStopwatch.cs" />
+    <Compile Include="Base\Ticker.SystemStopwatchBackedTicker.cs" />
     <Compile Include="Base\Ticker.SystemTicker.cs" />
     <Compile Include="Base\Ticker.cs" />
     <Compile Include="Cache\Cache.cs" />

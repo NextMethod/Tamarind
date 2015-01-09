@@ -13,7 +13,7 @@ namespace Tamarind.Base
         [PublicAPI]
         public static IStopwatch Create()
         {
-            return new SystemStopwatch();
+            return new TickerBackedStopwatch(Ticker.SystemStopwatchBackedTicker());
         }
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace Tamarind.Base
         [PublicAPI]
         public static IStopwatch Create(Ticker ticker)
         {
-            if (ticker == null || ReferenceEquals(Ticker.SysTicker, ticker)) { return Create(); }
+            if (ticker == null) { return Create(); }
 
             return new TickerBackedStopwatch(ticker);
         }

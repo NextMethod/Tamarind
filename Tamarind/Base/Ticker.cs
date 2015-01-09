@@ -11,7 +11,7 @@ namespace Tamarind.Base
     public abstract class Ticker
     {
 
-        internal static readonly Ticker SysTicker = new SystemTicker();
+        private static readonly Ticker SysTicker = new SystemTicker();
 
         /// <summary>
         ///     Returns the number of ticks elapsed since this ticker's fixed point of reference.
@@ -24,6 +24,14 @@ namespace Tamarind.Base
         public static Ticker SystemTicker()
         {
             return SysTicker;
+        }
+
+        /// <summary>
+        ///     A ticker backed by <see cref="System.Diagnostics.Stopwatch" />.
+        /// </summary>
+        public static Ticker SystemStopwatchBackedTicker()
+        {
+            return new SystemStopwatchBackedTicker();
         }
 
     }
