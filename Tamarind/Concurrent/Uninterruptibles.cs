@@ -12,30 +12,29 @@ namespace Tamarind.Concurrent
         {
             if (sleepFor == TimeSpan.Zero) { return; }
 
-            var interrupted = false;
-            try
+            var remainingTicks = sleepFor.Ticks;
+            var end = DateTime.Now.Ticks + remainingTicks;
+            while (true)
             {
-                var remainingTicks = sleepFor.Ticks;
-                var end = DateTime.Now.Ticks + remainingTicks;
-                while (true)
+                try
                 {
-                    try
+                    if (remainingTicks > 0)
                     {
+#if PORTABLE || NETFX_CORE
+                        using (var mre = new ManualResetEvent(false))
+                        {
+                            mre.WaitOne(TimeSpan.FromTicks(remainingTicks));
+                        }
+#else
                         Thread.Sleep(TimeSpan.FromTicks(remainingTicks));
-                        return;
+#endif
                     }
-                    catch (ThreadInterruptedException)
-                    {
-                        interrupted = true;
-                        remainingTicks = end - DateTime.Now.Ticks;
-                    }
+
+                    return;
                 }
-            }
-            finally
-            {
-                if (interrupted)
+                catch (Exception)
                 {
-                    Thread.CurrentThread.Interrupt();
+                    remainingTicks = end - DateTime.Now.Ticks;
                 }
             }
         }

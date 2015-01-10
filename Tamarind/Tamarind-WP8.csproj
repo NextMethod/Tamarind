@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E07CAE23-F648-498F-BADE-E64585A9B60B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tamarind</RootNamespace>
+    <AssemblyName>Tamarind</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile32</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\Portable-Win81+Wpa81</OutputPath>
+    <IntermediateOutputPath>obj\Debug\Portable-Win81+Wpa81</IntermediateOutputPath>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Release\Portable-Win81+Wpa81</OutputPath>
+    <IntermediateOutputPath>obj\Release\Portable-Win81+Wpa81</IntermediateOutputPath>
+    <DefineConstants>TRACE;NETFX_CORE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <TargetPlatform Include="Windows, Version=8.1" />
+    <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Concurrent\IRateLimiter.cs" />
+    <Compile Include="Concurrent\IStriped.cs" />
+    <Compile Include="Concurrent\MonitorLock.cs" />
+    <Compile Include="Concurrent\RateLimiter.Base.cs" />
+    <Compile Include="Concurrent\RateLimiter.cs" />
+    <Compile Include="Concurrent\RateLimiter.SleepingStopwatch.cs" />
+    <Compile Include="Concurrent\RateLimiter.SmoothBurstyRateLimiter.cs" />
+    <Compile Include="Concurrent\RateLimiter.SmoothRateLimiter.cs" />
+    <Compile Include="Concurrent\RateLimiter.SmoothWarmingUpRateLimiter.cs" />
+    <Compile Include="Concurrent\Striped.CompactStriped.cs" />
+    <Compile Include="Concurrent\Striped.cs" />
+    <Compile Include="Concurrent\Striped.PowerOfTwoStriped.cs" />
+    <Compile Include="Concurrent\Uninterruptibles.cs" />
+    <Compile Include="Core\ActionDisposable.cs" />
+    <Compile Include="Core\IStopwatch.cs" />
+    <Compile Include="Core\Preconditions.cs" />
+    <Compile Include="Core\Stopwatches.cs" />
+    <Compile Include="Core\Stopwatches.TickerBackedStopwatch.cs" />
+    <Compile Include="Core\Ticker.cs" />
+    <Compile Include="Core\Ticker.SystemStopwatchBackedTicker.cs" />
+    <Compile Include="Core\Ticker.SystemTicker.cs" />
+    <Compile Include="Core\TimeUnit.cs" />
+    <Compile Include="Math\IntMath.cs" />
+    <Compile Include="Primitives\Bytes.cs" />
+    <Compile Include="Primitives\Ints.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\Annotations.Jetbrains.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
+    <VisualStudioVersion>12.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
