@@ -42,7 +42,7 @@ namespace Tamarind.Concurrent
 
         public static async Task SleepUninterruptiblyAsync(TimeSpan sleepFor)
         {
-            await Task.Delay(sleepFor);
+            await Task.Delay(sleepFor).ConfigureAwait(true);
         }
 
     }

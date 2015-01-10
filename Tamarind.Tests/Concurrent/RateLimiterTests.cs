@@ -408,7 +408,7 @@ namespace Tamarind.Tests.Concurrent
         [Fact]
         public async Task TestInfinityWarmUp()
         {
-            var limiter = RateLimiter.Create(double.PositiveInfinity, TimeSpan.FromSeconds(10));
+            var limiter = RateLimiter.Create(double.PositiveInfinity, TimeSpan.FromSeconds(10), stopwatch);
             await limiter.Acquire(int.MaxValue / 4);
             await limiter.Acquire(int.MaxValue / 2);
             await limiter.Acquire(int.MaxValue);
@@ -439,7 +439,7 @@ namespace Tamarind.Tests.Concurrent
         [Fact]
         public async Task TestInfinityWarmUpTimeElapsed()
         {
-            var limiter = RateLimiter.Create(double.PositiveInfinity, TimeSpan.FromSeconds(10));
+            var limiter = RateLimiter.Create(double.PositiveInfinity, TimeSpan.FromSeconds(10), stopwatch);
             stopwatch.Instant += 1000000;
             limiter.SetRate(1.0);
 

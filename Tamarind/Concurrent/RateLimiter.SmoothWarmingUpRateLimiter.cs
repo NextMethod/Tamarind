@@ -58,7 +58,7 @@ namespace Tamarind.Concurrent
                 permitsToTake -= permitsAboveHalfToTake;
             }
             // measuring the integral on the left part of the function (the horizontal line)
-            micros += Convert.ToInt64(StableIntervalMicros * permitsToTake);
+            micros += (long) (StableIntervalMicros * permitsToTake);
             return micros;
         }
 

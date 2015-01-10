@@ -20,7 +20,17 @@ namespace Tamarind.Tests.Mocks
 
         public IReadOnlyList<string> Events
         {
-            get { return events; }
+            get
+            {
+                try
+                {
+                    return new List<string>(events.ToArray());
+                }
+                finally
+                {
+                    events.Clear();
+                }
+            }
         }
 
         public long Instant { get; set; }
