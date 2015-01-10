@@ -1,15 +1,14 @@
 ﻿using System;
+using System.Linq;
 
 using FluentAssertions;
-
-using System.Linq;
 
 using Tamarind.Core;
 using Tamarind.Tests.Mocks;
 
 using Xunit;
 
-namespace Tamarind.Tests.Base
+namespace Tamarind.Tests.Core
 {
     public class StopwatchTests
     {
