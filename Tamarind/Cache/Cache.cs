@@ -3,17 +3,16 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tamarind.Cache
 {
     /// <summary>
-    /// This class provides a skeletal implementation of the <see cref="ICache"/> interface to minimize the
-    /// effort required to implement this interface.
+    ///     This class provides a skeletal implementation of the <see cref="ICache" /> interface to minimize the
+    ///     effort required to implement this interface.
     /// </summary>
     public abstract class Cache<TKey, TValue> : ICache<TKey, TValue>
     {
+
         public long Count
         {
             get { throw new NotImplementedException(); }
@@ -88,5 +87,6 @@ namespace Tamarind.Cache
         {
             throw new NotImplementedException();
         }
+
     }
 }

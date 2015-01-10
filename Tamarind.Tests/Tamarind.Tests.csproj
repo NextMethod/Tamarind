@@ -68,10 +68,12 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Base\FakeTicker.cs" />
+    <Compile Include="Concurrent\RateLimiterTests.cs" />
+    <Compile Include="Mocks\FakeSleepingStopwatch.cs" />
+    <Compile Include="Mocks\FakeTicker.cs" />
     <Compile Include="Base\StopwatchTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Threading\StripedTests.cs" />
+    <Compile Include="Concurrent\StripedTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

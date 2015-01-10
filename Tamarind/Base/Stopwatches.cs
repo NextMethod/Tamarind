@@ -7,8 +7,9 @@ namespace Tamarind.Base
 {
     public static class Stopwatches
     {
+
         /// <summary>
-        /// Creates (but does not start) a new <see cref="IStopwatch" />.
+        ///     Creates (but does not start) a new <see cref="IStopwatch" />.
         /// </summary>
         [PublicAPI]
         public static IStopwatch Create()
@@ -17,7 +18,7 @@ namespace Tamarind.Base
         }
 
         /// <summary>
-        /// Creates (but does not start) as new <see cref="IStopwatch" /> using the specified time source.
+        ///     Creates (but does not start) as new <see cref="IStopwatch" /> using the specified time source.
         /// </summary>
         [PublicAPI]
         public static IStopwatch Create(Ticker ticker)
@@ -28,7 +29,7 @@ namespace Tamarind.Base
         }
 
         /// <summary>
-        /// Creates (and starts) as new <see cref="IStopwatch" />.
+        ///     Creates (and starts) as new <see cref="IStopwatch" />.
         /// </summary>
         [PublicAPI]
         public static IStopwatch CreateAndStart()
@@ -37,7 +38,7 @@ namespace Tamarind.Base
         }
 
         /// <summary>
-        /// Creates (and starts) as new <see cref="IStopwatch" /> using the specified time source.
+        ///     Creates (and starts) as new <see cref="IStopwatch" /> using the specified time source.
         /// </summary>
         [PublicAPI]
         public static IStopwatch CreateAndStart(Ticker ticker)

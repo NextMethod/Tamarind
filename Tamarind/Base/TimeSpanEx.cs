@@ -6,12 +6,23 @@ namespace Tamarind.Base
     public static class TimeSpanEx
     {
 
-        private const long TicksPerMicrosecond = 10;
+        public static readonly TimeSpan OneSecond = TimeSpan.FromSeconds(1);
 
-        public static TimeSpan FromMicroseconds(double value)
+        internal const long TicksPerMicrosecond = 10;
+
+        public static TimeSpan Max(this TimeSpan This, TimeSpan other)
         {
-            Preconditions.CheckArgument(Double.IsNaN(value) == false);
-            return new TimeSpan((long) value * TicksPerMicrosecond);
+            return This > other ? This : other;
+        }
+
+        public static TimeSpan Min(this TimeSpan This, TimeSpan other)
+        {
+            return This < other ? This : other;
+        }
+
+        public static long TotalMicroseconds(this TimeSpan This)
+        {
+            return This.Ticks / TicksPerMicrosecond;
         }
 
     }

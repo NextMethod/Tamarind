@@ -1,28 +1,31 @@
 ﻿using System;
 using System.Linq;
 
+using Tamarind.Annotations;
+
 namespace Tamarind.Base
 {
     internal sealed class TickerBackedStopwatch : IStopwatch
     {
 
-        private long _elapsedNanos;
+        private long elapsedNanos;
 
-        private long _startTick;
-
-        private readonly Ticker _ticker;
+        private long startTick;
 
         public TickerBackedStopwatch(Ticker ticker)
         {
-            _ticker = ticker;
+            Ticker = ticker;
             IsRunning = false;
         }
+
+        [VisibleForTesting]
+        internal Ticker Ticker { get; private set; }
 
         public TimeSpan Elapsed
         {
             get
             {
-                var ticks = IsRunning ? _ticker.Read() - _startTick + _elapsedNanos : _elapsedNanos;
+                var ticks = IsRunning ? Ticker.Read() - startTick + elapsedNanos : elapsedNanos;
                 return new TimeSpan(ticks);
             }
         }
@@ -31,7 +34,7 @@ namespace Tamarind.Base
 
         public IStopwatch Reset()
         {
-            _elapsedNanos = 0;
+            elapsedNanos = 0;
             IsRunning = false;
             return this;
         }
@@ -41,18 +44,18 @@ namespace Tamarind.Base
             if (!IsRunning)
             {
                 IsRunning = true;
-                _startTick = _ticker.Read();
+                startTick = Ticker.Read();
             }
             return this;
         }
 
         public IStopwatch Stop()
         {
-            var tick = _ticker.Read();
+            var tick = Ticker.Read();
             var wasRunning = IsRunning;
             IsRunning = false;
 
-            if (wasRunning) _elapsedNanos += tick - _startTick;
+            if (wasRunning) { elapsedNanos += tick - startTick; }
 
             return this;
         }

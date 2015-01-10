@@ -6,17 +6,20 @@ namespace Tamarind.Base
     public class ActionDisposable : IDisposable
     {
 
-        private readonly Action _callback;
+        private readonly Action callback;
 
         public ActionDisposable(Action callback)
         {
-            _callback = callback;
+            if (callback == null)
+            {
+                callback = () => { };
+            }
+            this.callback = callback;
         }
-
 
         public void Dispose()
         {
-            _callback();
+            callback();
         }
 
     }

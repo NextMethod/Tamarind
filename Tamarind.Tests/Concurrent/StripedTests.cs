@@ -4,11 +4,11 @@ using System.Linq;
 
 using FluentAssertions;
 
-using Tamarind.Threading;
+using Tamarind.Concurrent;
 
 using Xunit;
 
-namespace Tamarind.Tests.Threading
+namespace Tamarind.Tests.Concurrent
 {
     public class StripedTests
     {

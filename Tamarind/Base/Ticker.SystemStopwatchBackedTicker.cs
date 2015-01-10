@@ -7,18 +7,17 @@ namespace Tamarind.Base
     internal class SystemStopwatchBackedTicker : Ticker
     {
 
-        private readonly Stopwatch _sw;
-
+        private readonly Stopwatch sw;
 
         public SystemStopwatchBackedTicker()
         {
-            _sw = new Stopwatch();
-            _sw.Start();
+            sw = new Stopwatch();
+            sw.Start();
         }
 
         public override long Read()
         {
-            return _sw.ElapsedTicks;
+            return sw.ElapsedTicks;
         }
 
     }

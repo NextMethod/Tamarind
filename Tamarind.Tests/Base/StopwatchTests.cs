@@ -1,9 +1,11 @@
 ﻿using System;
-using System.Linq;
 
 using FluentAssertions;
 
+using System.Linq;
+
 using Tamarind.Base;
+using Tamarind.Tests.Mocks;
 
 using Xunit;
 
@@ -12,20 +14,38 @@ namespace Tamarind.Tests.Base
     public class StopwatchTests
     {
 
-        private readonly FakeTicker _ticker;
+        private readonly IStopwatch stopwatch;
 
-        private readonly IStopwatch _stopwatch;
+        private readonly FakeTicker ticker;
 
         public StopwatchTests()
         {
-            _ticker = new FakeTicker();
-            _stopwatch = Stopwatches.Create(_ticker);
+            ticker = new FakeTicker();
+            stopwatch = Stopwatches.Create(ticker);
+        }
+
+        [Fact]
+        public void TestEmptyCreateShouldUseSystemStopwatch()
+        {
+            var sw = Stopwatches.Create();
+            sw.Should().BeOfType<TickerBackedStopwatch>()
+                .Which.Ticker
+                .Should().BeOfType<SystemStopwatchBackedTicker>();
+        }
+
+        [Fact]
+        public void TestEmptyCreateStartedShouldUseSystemStopwatch()
+        {
+            var sw = Stopwatches.CreateAndStart();
+            sw.Should().BeOfType<TickerBackedStopwatch>()
+                .Which.Ticker
+                .Should().BeOfType<SystemStopwatchBackedTicker>();
         }
 
         [Fact]
         public void TestCreateStarted()
         {
-            Stopwatches.CreateAndStart(_ticker)
+            Stopwatches.CreateAndStart(ticker)
                 .IsRunning.Should().BeTrue();
         }
 
@@ -40,69 +60,146 @@ namespace Tamarind.Tests.Base
         [Fact]
         public void TestInitialState()
         {
-            _stopwatch.IsRunning.Should().BeFalse();
-            _stopwatch.Elapsed.Ticks.Should().Be(0);
+            IsRunning.Should().BeFalse();
+            Elapsed.Ticks.Should().Be(0);
         }
 
         [Fact]
         public void TestStart()
         {
-            _stopwatch.Start().Should().BeSameAs(_stopwatch);
-            _stopwatch.IsRunning.Should().BeTrue();
+            Start().Should().BeSameAs(stopwatch);
+            IsRunning.Should().BeTrue();
         }
 
         [Fact]
         public void TestStartWhileRunning()
         {
-            _stopwatch.Start();
-            _stopwatch.Start().IsRunning.Should().BeTrue();
+            Start();
+            Start().IsRunning.Should().BeTrue();
         }
 
         [Fact]
         public void TestStop()
         {
-            _stopwatch.Start();
-            _stopwatch.Stop().Should().BeSameAs(_stopwatch);
-            _stopwatch.IsRunning.Should().BeFalse();
+            Start();
+            Stop().Should().BeSameAs(stopwatch);
+            IsRunning.Should().BeFalse();
         }
 
         [Fact]
         public void TestStopOnNew()
         {
-            _stopwatch.Stop().Elapsed.ShouldBeEquivalentTo(TimeSpan.Zero);
-            _stopwatch.IsRunning.Should().BeFalse();
+            Stop().Elapsed.ShouldBeEquivalentTo(TimeSpan.Zero);
+            IsRunning.Should().BeFalse();
         }
 
         [Fact]
         public void TestResetOnNew()
         {
-            _ticker.Advance(1);
-            _stopwatch.Reset();
-            _stopwatch.IsRunning.Should().BeFalse();
+            Advance(1);
+            Reset();
+            IsRunning.Should().BeFalse();
 
-            _ticker.Advance(2);
-            _stopwatch.Elapsed.ShouldBeEquivalentTo(TimeSpan.Zero);
+            Advance(2);
+            Elapsed.ShouldBeEquivalentTo(TimeSpan.Zero);
 
-            _stopwatch.Start();
-            _ticker.Advance(3);
-            _stopwatch.Elapsed.Ticks.Should().Be(3);
+            Start();
+            Advance(3);
+            Elapsed.Ticks.Should().Be(3);
         }
 
         [Fact]
         public void TestResetWhileRunning()
         {
-            _ticker.Advance(1);
-            _stopwatch.Start();
+            Advance(1);
+            Start();
 
-            _stopwatch.Elapsed.Ticks.Should().Be(0);
+            Elapsed.Ticks.Should().Be(0);
 
-            _ticker.Advance(2);
-            _stopwatch.Reset()
+            Advance(2);
+            Reset()
                 .IsRunning.Should().BeFalse();
 
-            _ticker.Advance(3);
-            _stopwatch.Elapsed.Ticks.Should().Be(0);
+            Advance(3);
+            Elapsed.Ticks.Should().Be(0);
         }
 
+        [Fact]
+        public void TestElapsedWhileRunning()
+        {
+            Advance(78);
+            Start()
+                .Elapsed.Ticks.Should().Be(0);
+
+            Advance(345);
+            Elapsed.Ticks.Should().Be(345);
+        }
+
+        [Fact]
+        public void TestElapsedWhileNotRunning()
+        {
+            Advance(1);
+            Start();
+
+            Advance(4);
+            Stop();
+
+            Advance(9);
+            Elapsed.Ticks.Should().Be(4);
+        }
+
+        [Fact]
+        public void TestElapsedMultipleSegments()
+        {
+            Start();
+            Advance(9);
+            Stop();
+
+            Advance(16);
+
+            Start()
+                .Elapsed.Ticks.Should().Be(9);
+
+            Advance(25);
+            Elapsed.Ticks.Should().Be(34);
+
+            Stop();
+            Advance(36);
+            Elapsed.Ticks.Should().Be(34);
+        }
+
+        #region Test Helpers
+
+        private TimeSpan Elapsed
+        {
+            get { return stopwatch.Elapsed; }
+        }
+
+        private bool IsRunning
+        {
+            get { return stopwatch.IsRunning; }
+        }
+
+        private void Advance(long amount)
+        {
+            ticker.Advance(amount);
+        }
+
+        private IStopwatch Reset()
+        {
+            return stopwatch.Reset();
+        }
+
+        private IStopwatch Start()
+        {
+            return stopwatch.Start();
+        }
+
+        private IStopwatch Stop()
+        {
+            return stopwatch.Stop();
+        }
+
+        #endregion
     }
 }

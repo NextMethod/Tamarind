@@ -4,36 +4,36 @@ using System.Threading;
 
 using Tamarind.Base;
 
-namespace Tamarind.Tests.Base
+namespace Tamarind.Tests.Mocks
 {
     public class FakeTicker : Ticker
     {
 
-        private long _ticks = 0;
+        private long autoIncrementStep;
 
-        private long _autoIncrementStep;
+        private long ticks;
 
         public FakeTicker Advance(TimeSpan step)
         {
             return Advance(step.Ticks);
         }
 
-        public FakeTicker Advance(long ticks)
+        public FakeTicker Advance(long tcks)
         {
-            Preconditions.CheckArgument(ticks >= 0);
-            Interlocked.Add(ref _ticks, ticks);
+            Preconditions.CheckArgument(tcks >= 0);
+            Interlocked.Add(ref ticks, tcks);
             return this;
         }
 
         public FakeTicker SetAutoIncrementStep(TimeSpan step)
         {
-            _autoIncrementStep = step.Ticks;
+            autoIncrementStep = step.Ticks;
             return this;
         }
 
         public override long Read()
         {
-            return Interlocked.Add(ref _ticks, _autoIncrementStep);
+            return Interlocked.Add(ref ticks, autoIncrementStep);
         }
 
     }

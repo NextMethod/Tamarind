@@ -3,7 +3,7 @@ using System.Linq;
 
 using Tamarind.Annotations;
 
-namespace Tamarind.Threading
+namespace Tamarind.Concurrent
 {
     public interface IStriped<out T>
     {

@@ -6,14 +6,18 @@ namespace Tamarind.Cache
 {
     public class SimpleStatsCounter : IStatsCounter
     {
-        private long hitCount = 0;
-        private long missCount = 0;
-        private long loadSuccessCount = 0;
-        private long loadExceptionCount = 0;
-        private long totalLoadTime = 0;
-        private long evictionCount = 0;
 
-        public SimpleStatsCounter() {}
+        private long evictionCount;
+
+        private long hitCount;
+
+        private long loadExceptionCount;
+
+        private long loadSuccessCount;
+
+        private long missCount;
+
+        private long totalLoadTime;
 
         public void RecordHits(int count)
         {
@@ -46,5 +50,6 @@ namespace Tamarind.Cache
         {
             return new CacheStats(hitCount, missCount, loadSuccessCount, loadExceptionCount, totalLoadTime, evictionCount);
         }
+
     }
 }

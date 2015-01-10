@@ -5,21 +5,21 @@ using System.Threading;
 using Tamarind.Annotations;
 using Tamarind.Base;
 
-namespace Tamarind.Threading
+namespace Tamarind.Concurrent
 {
     public sealed class MonitorLock
     {
 
-        private readonly object _locker = new object();
+        private readonly object locker = new object();
 
         [PublicAPI]
-        public bool IsLockHeld { get { return Monitor.IsEntered(_locker); } }
+        public bool IsLockHeld { get { return Monitor.IsEntered(locker); } }
 
         [PublicAPI]
         public IDisposable Lock()
         {
             var lockWasTaken = false;
-            Monitor.Enter(_locker, ref lockWasTaken);
+            Monitor.Enter(locker, ref lockWasTaken);
             return new ActionDisposable(() => Unlock(lockWasTaken));
         }
 
@@ -27,7 +27,7 @@ namespace Tamarind.Threading
         {
             if (lockWasTaken)
             {
-                Monitor.Exit(_locker);
+                Monitor.Exit(locker);
             }
         }
 
