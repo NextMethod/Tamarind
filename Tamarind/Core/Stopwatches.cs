@@ -3,7 +3,7 @@ using System.Linq;
 
 using Tamarind.Annotations;
 
-namespace Tamarind.Base
+namespace Tamarind.Core
 {
     public static class Stopwatches
     {

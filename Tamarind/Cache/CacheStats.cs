@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-using Tamarind.Base;
+using Tamarind.Core;
 
 namespace Tamarind.Cache
 {

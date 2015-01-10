@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 
 using Tamarind.Annotations;
-using Tamarind.Base;
+using Tamarind.Core;
 
 namespace Tamarind.Cache
 {

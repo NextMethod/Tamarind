@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-using Tamarind.Base;
+using Tamarind.Core;
 
 namespace Tamarind.Concurrent
 {
@@ -20,7 +20,7 @@ namespace Tamarind.Concurrent
 
         public SmoothWarmingUpRateLimiter(SleepingStopwatch stopwatch, TimeSpan warmupPeriod) : base(stopwatch)
         {
-            warmupPeriodMicroseconds = warmupPeriod.TotalMicroseconds();
+            warmupPeriodMicroseconds = TimeUnit.Ticks.ToMicroseconds(warmupPeriod.Ticks);
         }
 
         protected override void SetRate(double permitsPerSecond, double stableIntervalMicroseconds)

@@ -4,7 +4,7 @@ using System.Linq;
 
 using Tamarind.Annotations;
 
-namespace Tamarind.Base
+namespace Tamarind.Core
 {
     /// <summary>
     ///     Simple static methods to be called at the start of your own methods to verify correct arugments and state.

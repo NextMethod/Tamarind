@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Tamarind.Base
+namespace Tamarind.Core
 {
     public class ActionDisposable : IDisposable
     {

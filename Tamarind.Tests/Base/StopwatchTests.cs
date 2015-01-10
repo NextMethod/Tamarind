@@ -4,7 +4,7 @@ using FluentAssertions;
 
 using System.Linq;
 
-using Tamarind.Base;
+using Tamarind.Core;
 using Tamarind.Tests.Mocks;
 
 using Xunit;

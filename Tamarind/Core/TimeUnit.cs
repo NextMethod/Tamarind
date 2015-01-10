@@ -3,7 +3,7 @@ using System.Linq;
 
 using Tamarind.Annotations;
 
-namespace Tamarind.Base
+namespace Tamarind.Core
 {
     /// <summary>
     ///     C# port of Doug Lea's Java public domain version.

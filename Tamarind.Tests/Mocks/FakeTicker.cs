@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading;
 
-using Tamarind.Base;
+using Tamarind.Core;
 
 namespace Tamarind.Tests.Mocks
 {

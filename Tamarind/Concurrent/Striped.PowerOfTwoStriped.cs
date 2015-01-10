@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-using Tamarind.Base;
+using Tamarind.Core;
 using Tamarind.Primitives;
 
 namespace Tamarind.Concurrent

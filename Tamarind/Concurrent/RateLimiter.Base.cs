@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-using Tamarind.Base;
+using Tamarind.Core;
 
 namespace Tamarind.Concurrent
 {

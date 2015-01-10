@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Tamarind.Base
+namespace Tamarind.Core
 {
     /// <summary>
     ///     An object that can accurately measure elapsed time.

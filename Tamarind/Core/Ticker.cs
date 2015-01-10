@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Tamarind.Base
+namespace Tamarind.Core
 {
     /// <summary>
     ///     A time source; returns a time value representing the number of ticks elapsed since some fixed but arbitrary point
