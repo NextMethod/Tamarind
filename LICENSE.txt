@@ -1,4 +1,4 @@
-Copyright 2014 Tamarind contributors.
+Copyright 2013-2015 Tamarind contributors.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions
