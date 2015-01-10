@@ -15,10 +15,10 @@ namespace Tamarind.Math
 
             if (ceiling)
             {
-                return Ints.Size - NumberOfLeadingZeros(x - 1);
+                return Ints.ByteCount - NumberOfLeadingZeros(x - 1);
             }
 
-            return (Ints.Size - 1) - NumberOfLeadingZeros(x);
+            return (Ints.ByteCount - 1) - NumberOfLeadingZeros(x);
         }
 
         // Taken from http://stackoverflow.com/a/24731095/27536
@@ -29,7 +29,7 @@ namespace Tamarind.Math
             x |= (x >> 4);
             x |= (x >> 8);
             x |= (x >> 16);
-            return Ints.Size - Ones(x);
+            return Ints.ByteCount - Ones(x);
         }
 
         private static int Ones(int x)

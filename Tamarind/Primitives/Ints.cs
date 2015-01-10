@@ -7,15 +7,24 @@ namespace Tamarind.Primitives
 {
     public static class Ints
     {
+        
+        /// <summary>
+        /// Number of bits used to represent an <see cref="int" /> value in two's complement binary form.
+        /// </summary>
+        [PublicAPI]
+        public const int BitCount = ByteCount * Bytes.BitCount;
+        
+        /// <summary>
+        /// Number of bytes used to represent an <see cref="int" /> value in two's complement binary form.
+        /// </summary>
+        [PublicAPI]
+        public const int ByteCount = sizeof (int);
 
+        /// <summary>
+        /// The largest power of two that can be represented as an <see cref="int" />
+        /// </summary>
         [PublicAPI]
-        public static readonly int Size = sizeof (int) * 8;
-        
-        [PublicAPI]
-        public static readonly int Bytes = Size / Primitives.Bytes.Size;
-        
-        [PublicAPI]
-        public static readonly int MaxPowerOfTwo = 1 << (Size - 2);
+        public const int MaxPowerOfTwo = 1 << (BitCount - 2);
 
     }
 }

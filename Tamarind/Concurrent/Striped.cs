@@ -5,7 +5,7 @@ using System.Threading;
 using Tamarind.Annotations;
 using Tamarind.Math;
 
-namespace Tamarind.Threading
+namespace Tamarind.Concurrent
 {
     public static class Striped
     {
@@ -53,7 +53,7 @@ namespace Tamarind.Threading
         /// <summary>
         /// A bit mask where all bits are set.
         /// </summary>
-        internal static readonly int AllBitsSet = ~0;
+        internal const int AllBitsSet = ~0;
 
         internal static int CeilToPowerOfTwo(int x)
         {

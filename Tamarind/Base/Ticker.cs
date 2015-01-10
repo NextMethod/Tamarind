@@ -26,6 +26,14 @@ namespace Tamarind.Base
             return SysTicker;
         }
 
+        /// <summary>
+        ///     A ticker backed by <see cref="System.Diagnostics.Stopwatch" />.
+        /// </summary>
+        public static Ticker SystemStopwatchBackedTicker()
+        {
+            return new SystemStopwatchBackedTicker();
+        }
+
     }
 
 }
