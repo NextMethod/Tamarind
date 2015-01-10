@@ -8,7 +8,17 @@ namespace Tamarind.Math
 {
     public static class IntMath
     {
+        /// <summary>
+        /// Returns <c>true</c> if <paramref name="x"/> represents a power of two.
+        /// </summary>
+        public static bool IsPowerOfTwo(int x)
+        {
+            return x > 0 & (x & (x - 1)) == 0;
+        }
 
+        /// <summary>
+        ///     Returns the base-2 logarithms of <paramref name="x" />.
+        /// </summary>
         public static int Log2(int x, bool ceiling = true)
         {
             Preconditions.CheckArgument(x > 0, "x", "must be > 0");
@@ -39,7 +49,7 @@ namespace Tamarind.Math
             x = (((x >> 4) + x) & 0x0f0f0f0f);
             x += (x >> 8);
             x += (x >> 16);
-            return(x & 0x0000003f);
+            return (x & 0x0000003f);
         }
 
     }
