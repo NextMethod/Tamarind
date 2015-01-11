@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-    <id>@project@</id>
-    <version>@build.number@</version>
+    <id>@id@</id>
+    <title>@title@</title>
+    <version>@version@</version>
     <authors>@authors@</authors>
     <owners>@authors@</owners>
     <summary>@summary@</summary>
@@ -15,5 +16,7 @@
     <tags>utility</tags>
   </metadata>
   <files>
+    <file src="lib\**\*.*" target="lib" />
+    <file src="*.*" exclude="lib\**\*.*" />
   </files>
 </package>

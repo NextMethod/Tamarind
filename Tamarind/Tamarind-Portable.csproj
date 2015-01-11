@@ -22,6 +22,7 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\Portable-net45+win+wpa81+wp80</OutputPath>
     <IntermediateOutputPath>obj\Debug\Portable-net45+win+wpa81+wp80</IntermediateOutputPath>
+    <DocumentationFile>bin\Debug\Portable-net45+win+wpa81+wp80\Tamarind.xml</DocumentationFile>
     <DefineConstants>TRACE;DEBUG;PORTABLE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -30,6 +31,7 @@
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\Portable-net45+win+wpa81+wp80</OutputPath>
     <IntermediateOutputPath>obj\Release\Portable-net45+win+wpa81+wp80</IntermediateOutputPath>
+    <DocumentationFile>bin\Release\Portable-net45+win+wpa81+wp80\Tamarind.xml</DocumentationFile>
     <DefineConstants>TRACE;PORTABLE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -38,7 +40,7 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SolutionInfo.cs">
+    <Compile Include="..\build\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Concurrent\IRateLimiter.cs" />

@@ -1,3 +1,5 @@
+#l "build/utilities.csx"
+
 ///////////////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 ///////////////////////////////////////////////////////////////////////////////
@@ -10,17 +12,34 @@ var configuration   = Argument<string>("configuration", "Debug");
 ///////////////////////////////////////////////////////////////////////////////
 
 var projectName = "Tamarind";
-
-// Files
-var solutionInfoCs = "SolutionInfo.cs";
+var projectDescription = "C# port of Google's Guava library.";
+var projectAuthors = new [] { "Tamarind Contributors" };
+var projectOwners = new [] { "Jordan S. Jones", "Esteban Araya" };
 
 // Directories
-var packagingRoot = GetDirectories("./packaging/").First();
-var solutions = GetFiles("./*.sln");
-var solutionDirs = solutions.Select(solution => solution.GetDirectory());
-var testResultsDir = GetDirectories("./testresults/").First();
+// WorkingDirectory is relative to this file. Make it relative to the Solution file.
+var baseDir = GetContext().Environment.WorkingDirectory;
+var packagingRoot = baseDir.Combine("Packaging");
+var testResultsDir = baseDir.Combine("TestResults");
+var tamarindPackagingDir = packagingRoot.Combine(projectName);
 
-var tamarindPackagingDir = packagingRoot.Combine("tamarind");
+// Files
+var solutionInfoCs = baseDir.Combine("build").GetFilePath("SolutionInfo.cs");
+var nuspecFile = baseDir.Combine("build").GetFilePath(projectName + ".nuspec");
+var solution = baseDir.GetFilePath(projectName + ".sln");
+var solutionDir = solution.GetDirectory();
+
+// Get whether or not this is a local build.
+var local = IsLocalBuild();
+var isPullRequest = IsPullRequest();
+
+// Release notes
+var releaseNotes = ParseReleaseNotes(baseDir.GetFilePath("ReleaseNotes.md"));
+
+// Version
+var buildNumber = GetBuildNumber();
+var version = releaseNotes.Version.ToString();
+var semVersion = local ? version : (version + string.Concat("-build-", buildNumber));
 
 ///////////////////////////////////////////////////////////////////////////////
 // SETUP / TEARDOWN
@@ -46,96 +65,141 @@ Task("Clean")
 	.Does(() =>
 {
 	// Clean Solution directories
-	foreach (var dir in solutionDirs)
-	{
-		Information("Cleaning {0}", dir);
-		CleanDirectories(dir + "/packages");
-		CleanDirectories(dir + "/**/bin/" + configuration);
-		CleanDirectories(dir + "/**/obj/" + configuration);
-	}
+	Information("Cleaning {0}", solutionDir);
+	CleanDirectories(solutionDir + "/packages");
+	CleanDirectories(solutionDir + "/**/bin/" + configuration);
+	CleanDirectories(solutionDir + "/**/obj/" + configuration);
 
     foreach (var dir in new [] { packagingRoot, testResultsDir })
     {
-        Information("Cleaning {0}", dir);
-        CleanDirectories(dir.FullPath);
+         Information("Cleaning {0}", dir);
+         CleanDirectories(dir.FullPath);
     }
 });
 
 Task("Restore")
+    .IsDependentOn("Clean")
 	.Does(() =>
 {
-	foreach (var solution in solutions)
-	{
-		Information("Restoring {0}", solution);
-		NuGetRestore(solution);
-	}
+	Information("Restoring {0}", solution);
+	NuGetRestore(solution);
 });
 
 Task("AssemblyInfo")
+    .IsDependentOn("Restore")
+    .WithCriteria(() => !local)
     .Does(() =>
 {
-    var releaseNotes = ParseReleaseNotes("ReleaseNotes.md");
-    Information("Creating {0} - Version: {1}", solutionInfoCs, releaseNotes.Version);
+    Information("Creating {0} - Version: {1}", solutionInfoCs, version);
     CreateAssemblyInfo(solutionInfoCs, new AssemblyInfoSettings {
         Product = projectName,
-        Version = releaseNotes.Version.ToString(),
-        FileVersion = releaseNotes.Version.ToString(),
-        });
+        Version = version,
+        FileVersion = version,
+        InformationalVersion = semVersion
+    });
 });
 
 Task("Build")
-	.IsDependentOn("Clean")
-	.IsDependentOn("Restore")
-    .IsDependentOn("AssemblyInfo")
+	.IsDependentOn("AssemblyInfo")
 	.Does(() =>
 {
-	foreach (var solution in solutions)
-	{
-		Information("Building {0}", solution);
-		MSBuild(solution, settings =>
-			settings.WithTarget("Build")
-				.SetConfiguration(configuration)
-			);
-	}
+	Information("Building {0}", solution);
+	MSBuild(solution, settings =>
+        settings.SetConfiguration(configuration)
+	);
 });
 
 Task("UnitTests")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    // Clean Solution directories
-    foreach (var dir in solutionDirs)
+    Information("Running Tests in {0}", solution);
+    XUnit2(
+        solutionDir + "/**/bin/" + configuration + "/**/*.Tests*.dll",
+        new XUnit2Settings {
+            OutputDirectory = testResultsDir,
+            HtmlReport = true
+        }
+    );
+});
+
+Task("CopyTamarindPackageFiles")
+    .IsDependentOn("UnitTests")
+    .Does(() =>
+{
+    var baseBuildDir = solutionDir.Combine(projectName).Combine("bin").Combine(configuration);
+
+    var net45BuildDir = baseBuildDir.Combine("Net45");
+    var net45PackageDir = tamarindPackagingDir.Combine("lib/net45/");
+
+    var netcore45BuildDir = baseBuildDir.Combine("NetCore45");
+    var netcore45PackageDir = tamarindPackagingDir.Combine("lib/netcore45/");
+
+    var portableBuildDir = baseBuildDir.Combine("Portable-net45+win+wpa81+wp80");
+    var portablePackageDir = tamarindPackagingDir.Combine("lib/portable-net45+wp80+win+wpa81/");
+
+    var dirMap = new Dictionary<DirectoryPath, DirectoryPath> {
+        { net45BuildDir, net45PackageDir },
+        { netcore45BuildDir, netcore45PackageDir },
+        { portableBuildDir, portablePackageDir }
+    };
+
+    CleanDirectories(dirMap.Values);
+
+    foreach (var dirPair in dirMap)
     {
-        Information("Running Tests in {0}", dir);
-        XUnit2(
-            dir + "/**/bin/" + configuration + "/**/*.Tests*.dll",
-            new XUnit2Settings {
-                OutputDirectory = testResultsDir,
-                HtmlReport = true
-            }
-        );
+        var files = new DirectoryInfo(dirPair.Key.FullPath)
+            .EnumerateFiles()
+            .Select(x => new FilePath(x.FullName));
+        CopyFiles(files, dirPair.Value);
     }
+
+    var packageFiles = new FilePath[] {
+        solutionDir.CombineWithFilePath("LICENSE.txt"),
+        solutionDir.CombineWithFilePath("README.md"),
+        solutionDir.CombineWithFilePath("ReleaseNotes.md")
+    };
+
+    CopyFiles(packageFiles, tamarindPackagingDir);
 });
 
 Task("CreateTamarindPackage")
+    .IsDependentOn("CopyTamarindPackageFiles")
     .Does(() =>
 {
-    var net45Dir = tamarindPackagingDir.Combine("lib/net45/");
-    var netcore45Dir = tamarindPackagingDir.Combine("lib/netcore45/");
-    var portableDir = tamarindPackagingDir.Combine("lib/portable-net45+wp80+win+wpa81/");
-
-    CleanDirectories(new [] { net45Dir, netcore45Dir, portableDir });
-
-    // CopyFiles();
-
+    NuGetPack(
+        nuspecFile,
+        new NuGetPackSettings {
+            Id = projectName,
+            Title = projectName,
+            Authors = projectAuthors.ToList(),
+            Owners = projectOwners.ToList(),
+            Summary = projectDescription,
+            Description = projectDescription,
+            Version = semVersion,
+            ReleaseNotes = releaseNotes.Notes.ToArray(),
+            BasePath = tamarindPackagingDir,
+            OutputDirectory = packagingRoot,
+            Symbols = false,
+            NoPackageAnalysis = false
+        }
+    );
 });
 
+///////////////////////////////////////////////////////////////////////////////
+// TASK TARGETS
+///////////////////////////////////////////////////////////////////////////////
+
+Task("Package")
+    .IsDependentOn("CreateTamarindPackage");
+
 Task("Default")
-	.IsDependentOn("Build")
-    .IsDependentOn("UnitTests");
+    .IsDependentOn("Package");
 
 ///////////////////////////////////////////////////////////////////////////////
 // EXECUTION
 ///////////////////////////////////////////////////////////////////////////////
+
+Information("Building version {0} of {1} ({2}).", version, solution.GetFilename(), semVersion);
 
 RunTarget(target);

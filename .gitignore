@@ -80,7 +80,7 @@ publish
 
 # NuGet Packages Directory
 packages
-[Ppackaging]
+[Pp]ackaging
 
 # Windows Azure Build Output
 *.build.csdef

@@ -23,6 +23,7 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\NetCore45\</OutputPath>
     <IntermediateOutputPath>obj\Debug\NetCore45\</IntermediateOutputPath>
+    <DocumentationFile>bin\Debug\NetCore45\Tamarind.xml</DocumentationFile>
     <DefineConstants>TRACE;DEBUG;NETFX_CORE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -32,6 +33,7 @@
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\NetCore45\</OutputPath>
     <IntermediateOutputPath>obj\Release\NetCore45\</IntermediateOutputPath>
+    <DocumentationFile>bin\Release\NetCore45\Tamarind.xml</DocumentationFile>
     <DefineConstants>TRACE;NETFX_CORE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -106,7 +108,7 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SolutionInfo.cs">
+    <Compile Include="..\build\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Concurrent\IRateLimiter.cs" />

@@ -10,16 +10,15 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{A8E58A5B-3533-419B-A97E-8EE8020CBAD3}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
-		build.csx = build.csx
+		build\build.csx = build\build.csx
 		build.ps1 = build.ps1
-		Tamarind.nuspec = Tamarind.nuspec
+		build\SolutionInfo.cs = build\SolutionInfo.cs
+		build\Tamarind.nuspec = build\Tamarind.nuspec
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tamarind-NetCore45", "Tamarind\Tamarind-NetCore45.csproj", "{71F1F848-E910-4425-A42E-7475FF80B89B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tamarind-Portable", "Tamarind\Tamarind-Portable.csproj", "{E5FD75E3-7811-4276-9CC3-714BE7C6FCFC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tamarind-WP8", "Tamarind\Tamarind-WP8.csproj", "{E07CAE23-F648-498F-BADE-E64585A9B60B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tamarind.Tests-Portable", "Tamarind.Tests\Tamarind.Tests-Portable.csproj", "{8791BF96-E1FE-4D0D-AB09-FCBCD0C98102}"
 EndProject
@@ -28,7 +27,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Meta", "Meta", "{C6563872-B
 		LICENSE.txt = LICENSE.txt
 		README.md = README.md
 		ReleaseNotes.md = ReleaseNotes.md
-		SolutionInfo.cs = SolutionInfo.cs
 	EndProjectSection
 EndProject
 Global
@@ -89,20 +87,6 @@ Global
 		{E5FD75E3-7811-4276-9CC3-714BE7C6FCFC}.Release|ARM.ActiveCfg = Release|Any CPU
 		{E5FD75E3-7811-4276-9CC3-714BE7C6FCFC}.Release|x64.ActiveCfg = Release|Any CPU
 		{E5FD75E3-7811-4276-9CC3-714BE7C6FCFC}.Release|x86.ActiveCfg = Release|Any CPU
-		{E07CAE23-F648-498F-BADE-E64585A9B60B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E07CAE23-F648-498F-BADE-E64585A9B60B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E07CAE23-F648-498F-BADE-E64585A9B60B}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{E07CAE23-F648-498F-BADE-E64585A9B60B}.Debug|ARM.Build.0 = Debug|Any CPU
-		{E07CAE23-F648-498F-BADE-E64585A9B60B}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{E07CAE23-F648-498F-BADE-E64585A9B60B}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{E07CAE23-F648-498F-BADE-E64585A9B60B}.Debug|x86.Build.0 = Debug|Any CPU
-		{E07CAE23-F648-498F-BADE-E64585A9B60B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E07CAE23-F648-498F-BADE-E64585A9B60B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E07CAE23-F648-498F-BADE-E64585A9B60B}.Release|ARM.ActiveCfg = Release|Any CPU
-		{E07CAE23-F648-498F-BADE-E64585A9B60B}.Release|ARM.Build.0 = Release|Any CPU
-		{E07CAE23-F648-498F-BADE-E64585A9B60B}.Release|x64.ActiveCfg = Release|Any CPU
-		{E07CAE23-F648-498F-BADE-E64585A9B60B}.Release|x86.ActiveCfg = Release|Any CPU
-		{E07CAE23-F648-498F-BADE-E64585A9B60B}.Release|x86.Build.0 = Release|Any CPU
 		{8791BF96-E1FE-4D0D-AB09-FCBCD0C98102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8791BF96-E1FE-4D0D-AB09-FCBCD0C98102}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8791BF96-E1FE-4D0D-AB09-FCBCD0C98102}.Debug|ARM.ActiveCfg = Debug|Any CPU
