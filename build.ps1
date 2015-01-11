@@ -2,7 +2,7 @@ Param(
     [string] $Script = "build.csx",
     [string] $Target = "Default",
     [string] $Configuration = "Debug",
-    [string] $Verbosity = "Verbose"
+    [string] $Verbosity = "normal"
 )
 
 $TOOLS_DIR = [io.path]::combine($PSScriptRoot, "tools")
