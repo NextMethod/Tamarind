@@ -37,6 +37,9 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
     <Compile Include="Core\ActionDisposable.cs" />
     <Compile Include="Core\IStopwatch.cs" />
     <Compile Include="Core\Preconditions.cs" />

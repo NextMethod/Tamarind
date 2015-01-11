@@ -10,6 +10,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{A8E58A5B-3533-419B-A97E-8EE8020CBAD3}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
+		build.csx = build.csx
+		build.ps1 = build.ps1
 		Tamarind.nuspec = Tamarind.nuspec
 	EndProjectSection
 EndProject
@@ -21,7 +23,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tamarind-WP8", "Tamarind\Ta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tamarind.Tests-Portable", "Tamarind.Tests\Tamarind.Tests-Portable.csproj", "{8791BF96-E1FE-4D0D-AB09-FCBCD0C98102}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B38F7C0F-3EE6-4698-B395-CA39878BE320}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Meta", "Meta", "{C6563872-B86B-4552-AFB6-AE860A931EEC}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+		ReleaseNotes.md = ReleaseNotes.md
+		SolutionInfo.cs = SolutionInfo.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

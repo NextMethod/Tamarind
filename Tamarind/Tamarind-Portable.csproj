@@ -38,6 +38,9 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
     <Compile Include="Concurrent\IRateLimiter.cs" />
     <Compile Include="Concurrent\IStriped.cs" />
     <Compile Include="Concurrent\MonitorLock.cs" />
