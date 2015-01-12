@@ -12,9 +12,8 @@ var configuration   = Argument<string>("configuration", "Debug");
 ///////////////////////////////////////////////////////////////////////////////
 
 var projectName = "Tamarind";
-var projectDescription = "C# port of Google's Guava library.";
-var projectAuthors = new [] { "Tamarind Contributors" };
-var projectOwners = new [] { "Jordan S. Jones", "Esteban Araya" };
+var projectDescription = "C# port of Google's Guava library";
+var projectAuthors = new [] { "Jordan S. Jones", "Esteban Araya" };
 
 // Directories
 // WorkingDirectory is relative to this file. Make it relative to the Solution file.
@@ -31,7 +30,7 @@ var solutionDir = solution.GetDirectory();
 
 // Get whether or not this is a local build.
 var local = IsLocalBuild();
-var isPullRequest = IsPullRequest();
+var isReleaseBuild = IsReleaseBuild();
 
 // Release notes
 var releaseNotes = ParseReleaseNotes(baseDir.GetFilePath("ReleaseNotes.md"));
@@ -39,7 +38,7 @@ var releaseNotes = ParseReleaseNotes(baseDir.GetFilePath("ReleaseNotes.md"));
 // Version
 var buildNumber = GetBuildNumber();
 var version = releaseNotes.Version.ToString();
-var semVersion = local ? version : (version + string.Concat("-build-", buildNumber));
+var semVersion = isReleaseBuild ? version : (version + string.Concat("-build-", buildNumber));
 
 ///////////////////////////////////////////////////////////////////////////////
 // SETUP / TEARDOWN
@@ -124,7 +123,8 @@ Task("UnitTests")
 });
 
 Task("CopyTamarindPackageFiles")
-    .WithCriteria(() => !isPullRequest)
+    .IsDependentOn("UnitTests")
+    .WithCriteria(() => isReleaseBuild)
     .Does(() =>
 {
     var baseBuildDir = solutionDir.Combine(projectName).Combine("bin").Combine(configuration);
@@ -165,6 +165,7 @@ Task("CopyTamarindPackageFiles")
 
 Task("CreateTamarindPackage")
     .IsDependentOn("CopyTamarindPackageFiles")
+    .WithCriteria(() => isReleaseBuild)
     .Does(() =>
 {
     NuGetPack(
@@ -173,14 +174,13 @@ Task("CreateTamarindPackage")
             Id = projectName,
             Title = projectName,
             Authors = projectAuthors.ToList(),
-            Owners = projectOwners.ToList(),
             Summary = projectDescription,
             Description = projectDescription,
             Version = semVersion,
             ReleaseNotes = releaseNotes.Notes.ToArray(),
             BasePath = tamarindPackagingDir,
             OutputDirectory = packagingRoot,
-            Symbols = false,
+            Symbols = true,
             NoPackageAnalysis = false
         }
     );
@@ -194,12 +194,12 @@ Task("Package")
     .IsDependentOn("CreateTamarindPackage");
 
 Task("Default")
-    .IsDependentOn("UnitTests");
+    .IsDependentOn("Package");
 
 ///////////////////////////////////////////////////////////////////////////////
 // EXECUTION
 ///////////////////////////////////////////////////////////////////////////////
 
-Information("Building version {0} of {1} ({2}).", version, solution.GetFilename(), semVersion);
+Information("Building {0} [{1}] ({2} - {3}).", solution.GetFilename(), version, semVersion);
 
 RunTarget(target);

@@ -1,7 +1,6 @@
 public int GetBuildNumber()
 {
-    var context = GetContext();
-    var val = context.Environment.GetEnvironmentVariable("APPVEYOR_BUILD_NUMBER");
+    var val = EnvironmentVariable("APPVEYOR_BUILD_NUMBER");
     if (val != null)
     {
         int version = 0;
@@ -15,23 +14,19 @@ public int GetBuildNumber()
 
 public string GetBuildSystemName()
 {
-    var context = GetContext();
-    if(context.Environment.GetEnvironmentVariable("APPVEYOR") != null)
-    {
-        return "AppVeyor";
-    }
-    return "Local";
+    return IsLocalBuild()
+        ? "Local"
+        : "AppVeyor";
 }
 
 public bool IsLocalBuild()
 {
-    return GetBuildSystemName() == "Local";
+    return !HasEnvironmentVariable("APPVEYOR");
 }
 
 public bool IsPullRequest()
 {
-    var context = GetContext();
-    var value = context.Environment.GetEnvironmentVariable("APPVEYOR_PULL_REQUEST_NUMBER");
+    var value = EnvironmentVariable("APPVEYOR_PULL_REQUEST_NUMBER");
     if(value != null)
     {
         int number = 0;
@@ -41,4 +36,9 @@ public bool IsPullRequest()
         }
     }
     return false;
+}
+
+public bool IsReleaseBuild()
+{
+    return HasEnvironmentVariable("APPVEYOR_REPO_TAG");
 }

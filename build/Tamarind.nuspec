@@ -5,7 +5,6 @@
     <title>@title@</title>
     <version>@version@</version>
     <authors>@authors@</authors>
-    <owners>@authors@</owners>
     <summary>@summary@</summary>
     <licenseUrl>https://github.com/NextMethod/Tamarind/blob/master/LICENSE.txt</licenseUrl>
     <projectUrl>https://github.com/NextMethod/Tamarind</projectUrl>
@@ -13,7 +12,6 @@
     <description>@description@</description>
     <releaseNotes>@releaseNotes@</releaseNotes>
     <copyright>Copyright 2013-2015 Tamarind contributors</copyright>
-    <tags>utility</tags>
   </metadata>
   <files>
     <file src="lib\**\*.*" target="lib" />
