@@ -86,7 +86,7 @@ Task("Restore")
 
 Task("AssemblyInfo")
     .IsDependentOn("Restore")
-    .WithCriteria(() => !local)
+    .WithCriteria(() => !isReleaseBuild)
     .Does(() =>
 {
     Information("Creating {0} - Version: {1}", solutionInfoCs, version);
