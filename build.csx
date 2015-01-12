@@ -124,7 +124,7 @@ Task("UnitTests")
 });
 
 Task("CopyTamarindPackageFiles")
-    .IsDependentOn("UnitTests")
+    .WithCriteria(() => !isPullRequest)
     .Does(() =>
 {
     var baseBuildDir = solutionDir.Combine(projectName).Combine("bin").Combine(configuration);
@@ -194,7 +194,7 @@ Task("Package")
     .IsDependentOn("CreateTamarindPackage");
 
 Task("Default")
-    .IsDependentOn("Package");
+    .IsDependentOn("UnitTests");
 
 ///////////////////////////////////////////////////////////////////////////////
 // EXECUTION
