@@ -1,4 +1,4 @@
 Tamarind
 ========
 
-A port of Google's Guava library.
+C# port of Google's Guava library.

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>@id@</id>
+    <title>@title@</title>
+    <version>@version@</version>
+    <authors>@authors@</authors>
+    <summary>@summary@</summary>
+    <licenseUrl>https://github.com/NextMethod/Tamarind/blob/master/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/NextMethod/Tamarind</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>@description@</description>
+    <releaseNotes>@releaseNotes@</releaseNotes>
+    <copyright>Copyright 2013-2015 Tamarind contributors</copyright>
+  </metadata>
+  <files>
+    <file src="lib\**\*.*" target="lib" />
+    <file src="*.*" exclude="lib\**\*.*" />
+  </files>
+</package>
