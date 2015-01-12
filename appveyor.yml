@@ -1,0 +1,19 @@
+version: '{build}'
+clone_folder: C:\Projects\Tamarind
+nuget:
+  disable_publish_on_pr: true
+build_script:
+- ps: C:\Projects\Tamarind\build.ps1 -Configuration Release
+test: off
+artifacts:
+- path: Packaging\**\*.nupkg
+  name: Tamarind_Nuget_Package
+deploy:
+- provider: NuGet
+  api_key:
+    secure: eKFfpWArnF+FMz1HAgITn9pxy4qH+hi03GsyuXT5dKcI9FAs9IBrJnssMOtFE5F0
+  skip_symbols: true
+  artifact: Tamarind_Nuget_Package
+  on:
+    branch: master
+    APPVEYOR_REPO_TAG: true
