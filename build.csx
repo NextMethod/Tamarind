@@ -180,7 +180,7 @@ Task("CreateTamarindPackage")
             ReleaseNotes = releaseNotes.Notes.ToArray(),
             BasePath = tamarindPackagingDir,
             OutputDirectory = packagingRoot,
-            Symbols = true,
+            Symbols = false,
             NoPackageAnalysis = false
         }
     );
