@@ -200,6 +200,6 @@ Task("Default")
 // EXECUTION
 ///////////////////////////////////////////////////////////////////////////////
 
-Information("Building {0} [{1}] ({2} - {3}).", solution.GetFilename(), version, semVersion);
+Information("Building {0} [{1}] ({2} - {3}).", solution.GetFilename(), configuration, version, semVersion);
 
 RunTarget(target);
